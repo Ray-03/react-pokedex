@@ -4,6 +4,7 @@ import { Box, ChakraProvider, Container } from "@chakra-ui/react";
 import Footer from "@/components/Footer";
 import { K_PADDING } from "@/constant";
 import Navbar from "@/components/Navbar";
+import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,13 +23,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <ChakraProvider>
-          <Container>
-            <Navbar />
-            <Box as="main" px={K_PADDING} flex={"auto"}>
-              {children}
-            </Box>
-            <Footer />
-          </Container>
+          <Navbar />
+          <Box as="main" px={K_PADDING} flex={"auto"}>
+            {children}
+          </Box>
+          <Footer />
         </ChakraProvider>
       </body>
     </html>
