@@ -20,5 +20,3 @@ export const K_POKEMON_TYPE_TAG_COLOURS: Record<string, string> = {
   steel: "#B7B7CE",
   fairy: "#D685AD",
 };
-
-export const K_POKEMON_CARD_COLOUR = "#27415B";

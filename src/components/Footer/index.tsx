@@ -6,7 +6,13 @@ import { K_PADDING } from "@/constant";
 
 const Footer = () => {
   return (
-    <HStack as="footer" width={"100%"} p={K_PADDING} justify={"space-between"}>
+    <HStack
+      as="footer"
+      width={"100%"}
+      p={K_PADDING + 2}
+      justify={"space-between"}
+      bgColor={"brand.primary"}
+    >
       <Text>Pokemon gotta catch em all - ❤</Text>
       <Stack direction={"row"} spacing={K_PADDING}>
         <SocialButton

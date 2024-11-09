@@ -12,6 +12,8 @@ const SocialButton = ({
 }) => {
   return (
     <Link
+      backgroundColor={"brand.secondary"}
+      shadow={"md"}
       rounded={"full"}
       minW={12}
       minH={12}

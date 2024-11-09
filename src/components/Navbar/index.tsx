@@ -19,7 +19,7 @@ export default function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <Box as="header" px={K_PADDING}>
+    <Box as="header" px={K_PADDING} bgColor={"brand.primary"}>
       <Flex minH={16} alignItems={"center"} justifyContent={"space-between"}>
         <IconButton
           size={"md"}
