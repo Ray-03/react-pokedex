@@ -9,7 +9,7 @@ export default function Home() {
   const { data, isLoading } = useGetPokemonsQuery({ page });
 
   return (
-    <Grid templateColumns="repeat(auto-fill, minmax(300px, 2fr))" gap={2}>
+    <Grid templateColumns="repeat(auto-fill, minmax(250px, 2fr))" gap={2}>
       {data?.map((el) => (
         <PokemonSummaryCard name={el.name} key={el.name} />
       ))}

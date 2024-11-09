@@ -1,10 +1,8 @@
 import PokemonSummaryCard from "@/components/PokemonSummaryCard";
 import { Chain } from "@/interface/pokemonEvolution";
-import { IPokemonSpecies } from "@/interface/pokemonSpecies";
 import { useGetPokemonEvolutionChainQuery } from "@/redux/features/apiSlice";
 import { ArrowDownIcon } from "@chakra-ui/icons";
-import { Flex, Grid, GridItem, Icon, Text } from "@chakra-ui/react";
-import { usePathname } from "next/navigation";
+import { Flex, Grid, GridItem, Text } from "@chakra-ui/react";
 import React, { ReactElement } from "react";
 
 interface EvolutionChain {
@@ -28,14 +26,16 @@ const extractEvolutionNames = (chain: Chain): EvolutionChain => {
 
 const renderChain = (evolutionChain: EvolutionChain) => {
   return (
-    <Flex direction="column" alignItems="center">
+    <Flex direction={"column"}>
       {evolutionChain.base}
       {evolutionChain.evolutions.length > 0 && (
         <ArrowDownIcon fontSize={"xxx-large"} />
       )}
       {evolutionChain.evolutions.length > 0 && (
         <Grid templateColumns="repeat(auto-fill, minmax(200px, 2fr))" gap={2}>
-          {evolutionChain.evolutions.map((el) => renderChain(el))}
+          {evolutionChain.evolutions.map((el, index) => (
+            <GridItem key={index}>{renderChain(el)}</GridItem>
+          ))}
         </Grid>
       )}
     </Flex>
@@ -57,7 +57,7 @@ const EvolutionChainComponent = ({ url }: { url: string }) => {
 
   const evolutionChain = extractEvolutionNames(evolutionData.chain);
   return (
-    <Flex gap={2} direction="column" alignItems="center">
+    <Flex direction="column" alignItems="center">
       {renderChain(evolutionChain)}
     </Flex>
   );
