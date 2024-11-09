@@ -1,6 +1,11 @@
-import { K_PADDING, K_POKEMON_TYPE_TAG_COLOURS } from "@/constant";
+import {
+  K_PADDING,
+  K_POKEMON_CARD_COLOUR,
+  K_POKEMON_TYPE_TAG_COLOURS,
+} from "@/constant";
 import { useGetPokemonQuery } from "@/redux/features/apiSlice";
 import {
+  Box,
   Card,
   CardBody,
   CardFooter,
@@ -28,23 +33,50 @@ const PokemonSummaryCard = ({ name }: PokemonSummaryCardProps) => {
       textColor={"white"}
       onClick={() => console.log(data)}
       cursor={"pointer"}
-      bgColor={"#111C27"}
+      bgColor={K_POKEMON_CARD_COLOUR}
     >
       <CardHeader borderTopRadius={"lg"} p={K_PADDING}>
         <HStack justify={"space-between"}>
           <Text>{data?.name}</Text>
-          <Text>ID: {data?.id}</Text>
+          <Text>#{data?.id}</Text>
         </HStack>
       </CardHeader>
-
       <CardBody
+        clipPath={"border-box"}
         bgColor={
           K_POKEMON_TYPE_TAG_COLOURS[data?.types?.[0]?.type?.name ?? ""] ??
           "white"
         }
         bgGradient="linear(to-t, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0) 30%)"
       >
-        <Image src={data?.sprites.other["official-artwork"].front_default} />
+        <Box
+          position="relative"
+          _hover={{
+            ".pokeball-image": {
+              transform: "rotate(0deg)",
+              opacity: 0.9,
+            },
+            ".pokemon-image": { transform: "scale(1.1)" },
+          }}
+        >
+          <Image
+            className="pokeball-image"
+            src={"/card-background/pokeball.png"}
+            transform="rotate(150deg)"
+            transition="transform 0.5s ease"
+            opacity={0.5}
+          />
+          <Image
+            className="pokemon-image"
+            transition="transform 0.5s ease"
+            position="absolute"
+            top="0"
+            left="0"
+            right="0"
+            bottom="0"
+            src={data?.sprites.other["official-artwork"].front_default}
+          />
+        </Box>
       </CardBody>
       <CardFooter borderBottomRadius={"lg"} p={K_PADDING}>
         {data?.types.map((el) => (
