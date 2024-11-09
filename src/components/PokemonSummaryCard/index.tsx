@@ -24,7 +24,7 @@ const PokemonSummaryCard = ({
   name,
   isClickable = true,
 }: PokemonSummaryCardProps) => {
-  const { data, isLoading } = useGetPokemonQuery({ name });
+  const { data } = useGetPokemonQuery({ name });
   const router = useRouter();
 
   return (

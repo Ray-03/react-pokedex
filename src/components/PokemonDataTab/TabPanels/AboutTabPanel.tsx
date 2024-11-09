@@ -37,20 +37,17 @@ const AboutTabPanel = () => {
             <Tr>
               <Td>Species</Td>
               <Td>
-                {
-                  speciesData?.genera.findLast(
-                    (el) => el.language.name === "en"
-                  )?.genus
-                }
+                {speciesData?.genera.findLast((el) => el.language.name === "en")
+                  ?.genus ?? "-"}
               </Td>
             </Tr>
             <Tr>
               <Td>Habitat</Td>
-              <Td>{speciesData?.habitat.name}</Td>
+              <Td>{speciesData?.habitat.name ?? "-"}</Td>
             </Tr>
             <Tr>
               <Td>Color</Td>
-              <Td>{speciesData?.color.name}</Td>
+              <Td>{speciesData?.color.name ?? "-"}</Td>
             </Tr>
             <Tr>
               <Td>Legendary Pokemon?</Td>
@@ -62,7 +59,7 @@ const AboutTabPanel = () => {
             </Tr>
             <Tr>
               <Td>Shape</Td>
-              <Td>{speciesData?.shape.name}</Td>
+              <Td>{speciesData?.shape.name ?? "-"}</Td>
             </Tr>
           </Tbody>
         </Table>

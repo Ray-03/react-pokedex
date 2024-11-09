@@ -11,7 +11,7 @@ const EvolutionTabPanel = () => {
   });
   if (speciesData)
     return <EvolutionChainComponent url={speciesData?.evolution_chain.url} />;
-  return <Text>Loading...</Text>;
+  return <Text>Data not found</Text>;
 };
 
 export default EvolutionTabPanel;
