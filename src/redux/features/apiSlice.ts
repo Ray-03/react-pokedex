@@ -1,10 +1,12 @@
 import { IPokemon } from "@/interface/pokemon";
 import { IPokeapiResponse, IPokemonListItem } from "@/interface/pokemonList";
+import { IPokemonSpecies } from "@/interface/pokemonSpecies";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { get } from "http";
 
 export const apiSlice = createApi({
   reducerPath: "api",
-  baseQuery: fetchBaseQuery({ baseUrl: "https://pokeapi.co/api/v2/" }),
+  baseQuery: fetchBaseQuery({ baseUrl: "https://pokeapi.co/api/v2" }),
   endpoints: (builder) => ({
     getPokemons: builder.query<
       IPokemonListItem[],
@@ -19,7 +21,14 @@ export const apiSlice = createApi({
     getPokemon: builder.query<IPokemon, { name: string }>({
       query: ({ name }) => `pokemon/${name}`,
     }),
+    getPokemonSpecies: builder.query<IPokemonSpecies, { name: string }>({
+      query: ({ name }) => `pokemon-species/${name}`,
+    }),
   }),
 });
 
-export const { useGetPokemonsQuery, useGetPokemonQuery } = apiSlice;
+export const {
+  useGetPokemonsQuery,
+  useGetPokemonQuery,
+  useGetPokemonSpeciesQuery,
+} = apiSlice;

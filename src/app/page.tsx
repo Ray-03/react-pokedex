@@ -1,15 +1,15 @@
 "use client";
 import PokemonSummaryCard from "@/components/PokemonSummaryCard";
 import { useGetPokemonsQuery } from "@/redux/features/apiSlice";
-import { Box, Grid } from "@chakra-ui/react";
-import { useEffect, useRef, useState } from "react";
+import { Grid } from "@chakra-ui/react";
+import { useState } from "react";
 
 export default function Home() {
   const [page, setPage] = useState(1);
   const { data, isLoading } = useGetPokemonsQuery({ page });
 
   return (
-    <Grid templateColumns="repeat(auto-fill, minmax(200px, 2fr))" gap={2}>
+    <Grid templateColumns="repeat(auto-fill, minmax(300px, 2fr))" gap={2}>
       {data?.map((el) => (
         <PokemonSummaryCard name={el.name} key={el.name} />
       ))}
