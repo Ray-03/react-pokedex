@@ -1,41 +1,17 @@
+"use client";
+import PokemonSummaryCard from "@/components/PokemonSummaryCard";
+import { useGetPokemonsQuery } from "@/redux/features/apiSlice";
 import { Box, Grid } from "@chakra-ui/react";
+import { useEffect, useRef, useState } from "react";
 
 export default function Home() {
-  const dummyArray = [
-    { name: "bulbasaur", url: "https://pokeapi.co/api/v2/pokemon/1/" },
-    { name: "ivysaur", url: "https://pokeapi.co/api/v2/pokemon/2/" },
-    { name: "venusaur", url: "https://pokeapi.co/api/v2/pokemon/3/" },
-    { name: "charmander", url: "https://pokeapi.co/api/v2/pokemon/4/" },
-    { name: "charmeleon", url: "https://pokeapi.co/api/v2/pokemon/5/" },
-    { name: "charizard", url: "https://pokeapi.co/api/v2/pokemon/6/" },
-    { name: "squirtle", url: "https://pokeapi.co/api/v2/pokemon/7/" },
-    { name: "wartortle", url: "https://pokeapi.co/api/v2/pokemon/8/" },
-    { name: "blastoise", url: "https://pokeapi.co/api/v2/pokemon/9/" },
-    { name: "caterpie", url: "https://pokeapi.co/api/v2/pokemon/10/" },
-    { name: "metapod", url: "https://pokeapi.co/api/v2/pokemon/11/" },
-    { name: "butterfree", url: "https://pokeapi.co/api/v2/pokemon/12/" },
-    { name: "weedle", url: "https://pokeapi.co/api/v2/pokemon/13/" },
-    { name: "kakuna", url: "https://pokeapi.co/api/v2/pokemon/14/" },
-    { name: "beedrill", url: "https://pokeapi.co/api/v2/pokemon/15/" },
-    { name: "pidgey", url: "https://pokeapi.co/api/v2/pokemon/16/" },
-    { name: "pidgeotto", url: "https://pokeapi.co/api/v2/pokemon/17/" },
-    { name: "pidgeot", url: "https://pokeapi.co/api/v2/pokemon/18/" },
-    { name: "rattata", url: "https://pokeapi.co/api/v2/pokemon/19/" },
-    { name: "raticate", url: "https://pokeapi.co/api/v2/pokemon/20/" },
-  ];
+  const [page, setPage] = useState(1);
+  const { data, isLoading } = useGetPokemonsQuery({ page });
+
   return (
     <Grid templateColumns="repeat(auto-fill, minmax(150px, 2fr))" gap={2}>
-      {dummyArray.map((el) => (
-        <Box
-          key={el.name}
-          p={5}
-          shadow="md"
-          borderWidth="1px"
-          borderRadius="md"
-          textAlign="center"
-        >
-          {el.name}
-        </Box>
+      {data?.map((el) => (
+        <PokemonSummaryCard name={el.name} key={el.name} />
       ))}
     </Grid>
   );

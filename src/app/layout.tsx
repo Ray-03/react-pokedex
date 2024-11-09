@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { Box, ChakraProvider, Container } from "@chakra-ui/react";
-import Footer from "@/components/Footer";
-import { K_PADDING } from "@/constant";
-import Navbar from "@/components/Navbar";
+import { ChakraProvider } from "@chakra-ui/react";
 import "./globals.css";
+import MainLayout from "./MainLayout";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,11 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <ChakraProvider>
-          <Navbar />
-          <Box as="main" px={K_PADDING} flex={"auto"}>
-            {children}
-          </Box>
-          <Footer />
+          <MainLayout>{children}</MainLayout>
         </ChakraProvider>
       </body>
     </html>
