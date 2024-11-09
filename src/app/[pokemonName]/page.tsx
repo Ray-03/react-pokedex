@@ -13,8 +13,9 @@ import {
 } from "@chakra-ui/react";
 import { usePathname } from "next/navigation";
 import React from "react";
-import AboutTabComponent from "./AboutTabComponent";
-import StatsTabComponent from "./StatsTabComponent";
+import AboutTabPanel from "../../components/PokemonDataTab/TabPanels/AboutTabPanel";
+import StatsTabPanel from "../../components/PokemonDataTab/TabPanels/StatsTabPanel";
+import PokemonDataTab from "@/components/PokemonDataTab";
 
 const PokemonDetailPage = () => {
   const currentPathname = usePathname();
@@ -33,29 +34,8 @@ const PokemonDetailPage = () => {
           isClickable={false}
         />
       </GridItem>
-
       <GridItem colSpan={2}>
-        <Tabs variant="enclosed">
-          <TabList>
-            <Tab>About</Tab>
-            <Tab>Stats</Tab>
-            <Tab>Evolution</Tab>
-            <Tab>Moves</Tab>
-          </TabList>
-
-          <TabPanels>
-            <TabPanel>
-              <AboutTabComponent />
-            </TabPanel>
-            <TabPanel>
-              <StatsTabComponent />
-            </TabPanel>
-            <TabPanel>
-              <h2>Content for Tab 3</h2>
-              <p>This is the content of the third tab.</p>
-            </TabPanel>
-          </TabPanels>
-        </Tabs>
+        <PokemonDataTab />
       </GridItem>
     </SimpleGrid>
   );

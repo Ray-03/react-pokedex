@@ -15,7 +15,7 @@ import {
 
 ChartJS.register(RadialLinearScale, PointElement, LineElement, Legend);
 
-const StatsTabComponent = () => {
+const StatsTabPanel = () => {
   const currentPathname = usePathname();
   const newCurrentPathname = currentPathname.replace("/", "");
   const { data: pokemonData } = useGetPokemonQuery({
@@ -99,4 +99,4 @@ const StatsTabComponent = () => {
   );
 };
 
-export default StatsTabComponent;
+export default StatsTabPanel;

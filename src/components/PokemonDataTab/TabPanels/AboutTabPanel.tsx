@@ -6,7 +6,7 @@ import { Table, TableContainer, Tbody, Td, Text, Tr } from "@chakra-ui/react";
 import { usePathname } from "next/navigation";
 import React from "react";
 
-const AboutTabComponent = () => {
+const AboutTabPanel = () => {
   const currentPathname = usePathname();
   const newCurrentPathname = currentPathname.replace("/", "");
   const { data: speciesData } = useGetPokemonSpeciesQuery({
@@ -71,4 +71,4 @@ const AboutTabComponent = () => {
   );
 };
 
-export default AboutTabComponent;
+export default AboutTabPanel;
