@@ -25,6 +25,8 @@ const MainLayout = ({
       brand: {
         primary: "#27415B",
         secondary: "#608FD4",
+        white: "#F5F5F5",
+        black: "#2C2C2C",
       },
     },
     fonts: {
@@ -34,21 +36,9 @@ const MainLayout = ({
     styles: {
       global: {
         body: {
-          bg: "brand.900",
-          color: "brand.900",
+          bg: "brand.primary",
+          color: "brand.white",
         },
-      },
-    },
-    components: {
-      Text: {
-        baseStyle: () => ({
-          color: "white",
-        }),
-      },
-      Link: {
-        baseStyle: () => ({
-          color: "white",
-        }),
       },
     },
   });
