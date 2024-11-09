@@ -9,7 +9,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "React Pokedex",
+  title: "React Pokédex",
   description: "Gotta catch em all!",
   icons: { icon: "/pokeball.png", apple: "/pokeball.png" },
 };
