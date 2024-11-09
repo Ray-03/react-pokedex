@@ -5,9 +5,11 @@ import {
   CardBody,
   CardFooter,
   CardHeader,
+  HStack,
   Image,
   Tag,
   TagLabel,
+  Text,
 } from "@chakra-ui/react";
 import React from "react";
 
@@ -21,17 +23,18 @@ const PokemonSummaryCard = ({ name }: PokemonSummaryCardProps) => {
   return (
     <Card
       minW={200}
-      //   p={5}
       shadow="md"
-      //   borderWidth="1px"
       borderRadius="lg"
-      //   textAlign="center"
+      textColor={"white"}
       onClick={() => console.log(data)}
       cursor={"pointer"}
       bgColor={"#111C27"}
     >
-      <CardHeader borderTopRadius={"lg"} color={"white"} p={K_PADDING}>
-        {data?.name}
+      <CardHeader borderTopRadius={"lg"} p={K_PADDING}>
+        <HStack justify={"space-between"}>
+          <Text>{data?.name}</Text>
+          <Text>ID: {data?.id}</Text>
+        </HStack>
       </CardHeader>
 
       <CardBody
@@ -39,6 +42,7 @@ const PokemonSummaryCard = ({ name }: PokemonSummaryCardProps) => {
           K_POKEMON_TYPE_TAG_COLOURS[data?.types?.[0]?.type?.name ?? ""] ??
           "white"
         }
+        bgGradient="linear(to-t, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0) 30%)"
       >
         <Image src={data?.sprites.other["official-artwork"].front_default} />
       </CardBody>
@@ -49,8 +53,9 @@ const PokemonSummaryCard = ({ name }: PokemonSummaryCardProps) => {
             key={el.type.name}
             borderRadius={"full"}
             bgColor={K_POKEMON_TYPE_TAG_COLOURS[el.type.name] ?? "white"}
+            textColor={"white"}
           >
-            <TagLabel color={"white"}>{el.type.name}</TagLabel>
+            <TagLabel>{el.type.name}</TagLabel>
           </Tag>
         ))}
       </CardFooter>
