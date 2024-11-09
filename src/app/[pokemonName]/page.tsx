@@ -5,13 +5,22 @@ import {
   useGetPokemonQuery,
   useGetPokemonSpeciesQuery,
 } from "@/redux/features/apiSlice";
+import { Radar } from "react-chartjs-2";
 import {
+  Chart as ChartJS,
+  RadialLinearScale,
+  PointElement,
+  LineElement,
+  Filler,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import {
+  Box,
   GridItem,
   SimpleGrid,
-  Stack,
   Tab,
   Table,
-  TableCaption,
   TableContainer,
   TabList,
   TabPanel,
@@ -20,13 +29,19 @@ import {
   Tbody,
   Td,
   Text,
-  Tfoot,
-  Th,
-  Thead,
   Tr,
 } from "@chakra-ui/react";
 import { usePathname } from "next/navigation";
 import React from "react";
+
+ChartJS.register(
+  RadialLinearScale,
+  PointElement,
+  LineElement,
+  Filler,
+  Tooltip,
+  Legend
+);
 
 const PokemonDetailPage = () => {
   const currentPathname = usePathname();
@@ -43,6 +58,76 @@ const PokemonDetailPage = () => {
   const latestFlavorText = flavorTexts?.findLast(
     (el) => el.language.name === "en"
   )?.flavor_text;
+  const statsMax = [
+    { name: "HP", value: 255 },
+    { name: "Attack", value: 180 },
+    { name: "Defense", value: 200 },
+    { name: "Special Attack", value: 180 },
+    { name: "Special Defense", value: 200 },
+    { name: "Speed", value: 200 },
+  ];
+  const statsDataRaw = pokemonData?.stats;
+
+  const statsDivider = statsMax.map((el) => el.value);
+  const statNames = [
+    "hp",
+    "attack",
+    "defense",
+    "special-attack",
+    "special-defense",
+    "speed",
+  ];
+
+  const statsData = statNames.map((name, index) => {
+    const stat = statsDataRaw?.find((el) => el.stat.name === name);
+    return ((stat?.base_stat ?? 0) / statsDivider[index]) * 100;
+  });
+  const data = {
+    labels: statsMax.map((el) => el.name),
+    datasets: [
+      {
+        label: "Stats %",
+        data: statsData,
+        backgroundColor: "#27415BAA",
+        borderColor: "#608FD4",
+        borderWidth: 5,
+      },
+    ],
+  };
+
+  const options = {
+    plugins: {
+      legend: {
+        labels: {
+          font: {
+            size: 20,
+            weight: "bold",
+          },
+        },
+      },
+    },
+    scales: {
+      r: {
+        angleLines: {
+          color: "#27415BEE",
+        },
+        grid: {
+          color: "#27415BEE",
+        },
+        pointLabels: {
+          font: {
+            size: 14,
+            weight: "bold",
+          },
+        },
+        suggestedMin: 0,
+        suggestedMax: 100,
+        ticks: {
+          display: false,
+        },
+      },
+    },
+  };
 
   return (
     <SimpleGrid
@@ -116,8 +201,9 @@ const PokemonDetailPage = () => {
               </TableContainer>
             </TabPanel>
             <TabPanel>
-              <h2>Content for Tab 2</h2>
-              <p>This is the content of the second tab.</p>
+              <Box bgColor={"brand.white"}>
+                <Radar data={data} options={options} />
+              </Box>
             </TabPanel>
             <TabPanel>
               <h2>Content for Tab 3</h2>
