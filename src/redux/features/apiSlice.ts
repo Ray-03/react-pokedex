@@ -1,4 +1,5 @@
 import { IPokemon } from "@/interface/pokemon";
+import { IPokemonEvolution } from "@/interface/pokemonEvolution";
 import { IPokeapiResponse, IPokemonListItem } from "@/interface/pokemonList";
 import { IPokemonSpecies } from "@/interface/pokemonSpecies";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
@@ -24,6 +25,14 @@ export const apiSlice = createApi({
     getPokemonSpecies: builder.query<IPokemonSpecies, { name: string }>({
       query: ({ name }) => `pokemon-species/${name}`,
     }),
+    getPokemonEvolutionChain: builder.query<
+      IPokemonEvolution,
+      { name: string }
+    >({
+      query: ({ name }) => {
+        return `${name}`;
+      },
+    }),
   }),
 });
 
@@ -31,4 +40,5 @@ export const {
   useGetPokemonsQuery,
   useGetPokemonQuery,
   useGetPokemonSpeciesQuery,
+  useGetPokemonEvolutionChainQuery,
 } = apiSlice;

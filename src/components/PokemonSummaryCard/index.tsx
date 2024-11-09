@@ -29,6 +29,7 @@ const PokemonSummaryCard = ({
 
   return (
     <Card
+      key={name}
       minW={200}
       shadow="md"
       borderRadius="lg"
